@@ -1,0 +1,55 @@
+# .gitignoreファイル用のPythonコード
+
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+*.rdb
+*.log
+*.sqlite
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# テスト/デバッグ
+.hypothesis/
+.pytest_cache/
+
+# プロジェクト設定
+/.idea/
+/.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# 環境設定ファイル
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media
+
+# Flask
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
