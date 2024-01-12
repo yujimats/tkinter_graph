@@ -1,7 +1,10 @@
+import time
+import numpy as np
 import tkinter as tk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-import numpy as np
+
+from functions import Iterator
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -26,17 +29,35 @@ class Application(tk.Frame):
         frame.pack()
 
         # ボタンの作成
-        button = tk.Button(self.master, text='Draw Graph', command=self.button_click)
+        button = tk.Button(self.master, text='Draw Graph', command=self.run_gengraph)
         # 配置
         button.pack(side=tk.BOTTOM)
 
-    def button_click(self):
+    def run_gengraph(self):
         with open('data.csv', 'r') as f:
             data = np.loadtxt(f, delimiter=',')
-            x = data[:, 0]
-            y = data[:, 1]
-        self.ax.plot(x, y)
-        self.fig_canvas.draw()
+
+        # iteratorのインスタンス生成
+        itr = Iterator(data)
+
+        # グラフ描画用のlist
+        x_ = []
+        y_ = []
+
+        for _ in range(len(itr)):
+            # itrからデータを取得
+            x, y = itr.__next__()
+            # リストに追加
+            x_.append(x)
+            y_.append(y)
+            # 描画
+            self.ax.clear() # グラフのリセット
+            self.ax.plot(x_, y_)
+            self.fig_canvas.draw()
+            # GUIの更新
+            self.master.update()
+            # 待機時間
+            time.sleep(1)
 
 if __name__=='__main__':
     root = tk.Tk()
