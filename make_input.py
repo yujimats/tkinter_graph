@@ -1,6 +1,7 @@
 import numpy as np
 
 def generate_random_data(x_range, random_range):
+    np.random.seed(123)
     x = np.linspace(*x_range)
     random_values = np.random.uniform(*random_range, size=x.shape)
     y = x + random_values
